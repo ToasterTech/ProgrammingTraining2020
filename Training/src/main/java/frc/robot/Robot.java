@@ -29,7 +29,6 @@ public class Robot extends IterativeRobot {
   //JoyStick
   public Joystick xboxcontroller = new Joystick(0);
   //public static JoySticks operatorStick = new JoySticks(1);
-  protected PWMTalonSRX examplePwmTalonSRX = new PWMTalonSRX(2);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -38,7 +37,7 @@ public class Robot extends IterativeRobot {
   PWMTalonSRX PWMTalonSRX1 = new PWMTalonSRX(1);
   PWMTalonSRX PWMTalonSRX2 = new PWMTalonSRX(2);
   PWMTalonSRX PWMTalonSRX3 = new PWMTalonSRX(3);
-  PWMTalonSRX PWMTalonSRX4 = new PWMTalonSRX(4);
+  PWMTalonSRX PWMTalonSRX4 = new PWMTalonSRX(0);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -48,7 +47,8 @@ public class Robot extends IterativeRobot {
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser); 
+    SmartDashboard.putData("Auto choices", m_chooser);
+    this.PWMTalonSRX3.setInverted(true);
   }
 
   /**
@@ -88,14 +88,14 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    if (java.lang.System.currentTimeMillis() - timems >=2000){
+   if (java.lang.System.currentTimeMillis() - timems >=2000){
       this.PWMTalonSRX1.set(0.5);
-      this.PWMTalonSRX2.set(0.5);
+      this.PWMTalonSRX2.set(-0.5);
       this.PWMTalonSRX3.set(0.5);
       this.PWMTalonSRX4.set(0.5);
     }
     this.PWMTalonSRX1.set(0.5);
-    this.PWMTalonSRX2.set(0.5);
+    this.PWMTalonSRX2.set(-0.5);
     this.PWMTalonSRX3.set(0.5);
     this.PWMTalonSRX4.set(0.5);
    
@@ -119,6 +119,7 @@ public class Robot extends IterativeRobot {
     this.PWMTalonSRX2.set(xboxcontroller.getRawAxis(1));
     this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(5));
     this.PWMTalonSRX4.set(xboxcontroller.getRawAxis(5));
+    
   }
 
   /**
