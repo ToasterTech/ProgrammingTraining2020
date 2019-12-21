@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -19,12 +20,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
+ * functions corresponding to each mode, as described in the IterativeRobot 
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends IterativeRobot {
+  //JoyStick
+  public Joystick xboxcontroller = new Joystick(0);
+  //public static JoySticks operatorStick = new JoySticks(1);
   protected PWMTalonSRX examplePwmTalonSRX = new PWMTalonSRX(2);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
@@ -100,8 +104,21 @@ public class Robot extends IterativeRobot {
   /**
    * This function is called periodically during operator control.
    */
+  /**
+   *  *This gets control points for controllers
+   */
   @Override
   public void teleopPeriodic() {
+    if (java.lang.System.currentTimeMillis() - timems >=2000){
+      this.PWMTalonSRX1.set(xboxcontroller.getRawAxis(1));
+      this.PWMTalonSRX2.set(xboxcontroller.getRawAxis(1));
+      this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(5));
+      this.PWMTalonSRX4.set(xboxcontroller.getRawAxis(5));
+    }
+    this.PWMTalonSRX1.set(xboxcontroller.getRawAxis(1));
+    this.PWMTalonSRX2.set(xboxcontroller.getRawAxis(1));
+    this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(5));
+    this.PWMTalonSRX4.set(xboxcontroller.getRawAxis(5));
   }
 
   /**
