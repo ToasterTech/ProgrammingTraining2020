@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
   PWMTalonSRX PWMTalonSRX1 = new PWMTalonSRX(1);
   PWMTalonSRX PWMTalonSRX2 = new PWMTalonSRX(2);
   PWMTalonSRX PWMTalonSRX3 = new PWMTalonSRX(3);
-  PWMTalonSRX PWMTalonSRX4 = new PWMTalonSRX(0);
+  PWMTalonSRX PWMTalonSRX0 = new PWMTalonSRX(0);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -89,15 +89,15 @@ public class Robot extends IterativeRobot {
   @Override
   public void autonomousPeriodic() {
    if (java.lang.System.currentTimeMillis() - timems >=2000){
+    this.PWMTalonSRX0.set(0.5);
       this.PWMTalonSRX1.set(0.5);
       this.PWMTalonSRX2.set(-0.5);
       this.PWMTalonSRX3.set(0.5);
-      this.PWMTalonSRX4.set(0.5);
     }
+    this.PWMTalonSRX0.set(0.5);
     this.PWMTalonSRX1.set(0.5);
     this.PWMTalonSRX2.set(-0.5);
     this.PWMTalonSRX3.set(0.5);
-    this.PWMTalonSRX4.set(0.5);
    
   }
 
@@ -110,15 +110,15 @@ public class Robot extends IterativeRobot {
   @Override
   public void teleopPeriodic() {
     if (java.lang.System.currentTimeMillis() - timems >=2000){
-      this.PWMTalonSRX1.set(xboxcontroller.getRawAxis(1));
-      this.PWMTalonSRX2.set(xboxcontroller.getRawAxis(1));
-      this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(5));
-      this.PWMTalonSRX4.set(xboxcontroller.getRawAxis(5));
+      this.PWMTalonSRX0.set(xboxcontroller.getRawAxis(5));
+      this.PWMTalonSRX1.set(xboxcontroller.getRawAxis(5));
+      this.PWMTalonSRX2.set(-xboxcontroller.getRawAxis(1));
+      this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(1));
     }
-    this.PWMTalonSRX1.set(xboxcontroller.getRawAxis(1));
-    this.PWMTalonSRX2.set(xboxcontroller.getRawAxis(1));
-    this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(5));
-    this.PWMTalonSRX4.set(xboxcontroller.getRawAxis(5));
+    this.PWMTalonSRX0.set(xboxcontroller.getRawAxis(5));
+    this.PWMTalonSRX1.set(xboxcontroller.getRawAxis(5));
+    this.PWMTalonSRX2.set(-xboxcontroller.getRawAxis(1));
+    this.PWMTalonSRX3.set(xboxcontroller.getRawAxis(1));
     
   }
 
