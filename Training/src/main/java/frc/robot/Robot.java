@@ -6,8 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
+import java.util.Timer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,10 +25,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends IterativeRobot {
+  protected PWMTalonSRX examplePwmTalonSRX = new PWMTalonSRX(2);
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
+  private long timems;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  PWMTalonSRX PWMTalonSRX1 = new PWMTalonSRX(1);
+  PWMTalonSRX PWMTalonSRX2 = new PWMTalonSRX(2);
+  PWMTalonSRX PWMTalonSRX3 = new PWMTalonSRX(3);
+  PWMTalonSRX PWMTalonSRX4 = new PWMTalonSRX(4);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -32,7 +44,7 @@ public class Robot extends IterativeRobot {
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putData("Auto choices", m_chooser); 
   }
 
   /**
@@ -60,10 +72,11 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // autoSelected = SmartDashboard.getString("Auto Selector",
-    // defaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+   m_autoSelected = m_chooser.getSelected();
+   // autoSelected = SmartDashboard.getString("Auto Selector");
+   // defaultAuto);
+   System.out.println("Auto selected: " + m_autoSelected);
+   timems = System.currentTimeMillis();
   }
 
   /**
@@ -71,15 +84,17 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
+    if (java.lang.System.currentTimeMillis() - timems >=2000){
+      this.PWMTalonSRX1.set(0.5);
+      this.PWMTalonSRX2.set(0.5);
+      this.PWMTalonSRX3.set(0.5);
+      this.PWMTalonSRX4.set(0.5);
     }
+    this.PWMTalonSRX1.set(0.5);
+    this.PWMTalonSRX2.set(0.5);
+    this.PWMTalonSRX3.set(0.5);
+    this.PWMTalonSRX4.set(0.5);
+   
   }
 
   /**
@@ -94,5 +109,6 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void testPeriodic() {
+ 
+    }  
   }
-}
